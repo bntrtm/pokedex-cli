@@ -15,7 +15,7 @@ type cacheEntry struct {
 type Cache struct {
 	cachedEntries	map[string]cacheEntry
 	interval		time.Duration
-	mu				sync.Mutex
+	mu				*sync.Mutex
 }
 
 func (c *Cache) Add(key string, val []byte) {
