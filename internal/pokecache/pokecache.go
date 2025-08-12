@@ -3,13 +3,11 @@ package pokecache
 import (
 	"time"
 	"sync"
-	"fmt"
-	"encoding/json"
 )
 
 type cacheEntry struct {
 	createdAt	time.Time //time entry was created
-	val			[]byte //raw data we're caching
+	data		[]byte //raw data we're caching
 }
 
 type Cache struct {
@@ -18,31 +16,27 @@ type Cache struct {
 	mu				*sync.Mutex
 }
 
-func (c *Cache) Add(key string, val []byte) {
+func (c *Cache) Add(key string, value []byte) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	var addEntry cacheEntry
-	if err := json.Unmarshal(val, &addEntry); err != nil {
-		fmt.Println(err)
-	}
 
-	c.cachedEntries[key] = addEntry
+	c.cachedEntries[key] = cacheEntry{
+		createdAt: time.Now().UTC(),
+		data: value,
+	}
 
 }
 
 func (c *Cache) Get(key string) (entryData []byte, found bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
+
 	val, ok := c.cachedEntries[key]
 	if !ok {
 		return nil, false
 	}
 
-	data, err := json.Marshal(val)
-	if err != nil {
-		return nil, false
-	}
-	return data, true
+	return val.data, true
 }
 
 func (c *Cache) reapLoop() {
