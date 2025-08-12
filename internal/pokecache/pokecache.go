@@ -19,6 +19,8 @@ type Cache struct {
 }
 
 func (c *Cache) Add(key string, val []byte) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
 	var addEntry cacheEntry
 	if err := json.Unmarshal(val, &addEntry); err != nil {
 		fmt.Println(err)
@@ -29,6 +31,8 @@ func (c *Cache) Add(key string, val []byte) {
 }
 
 func (c *Cache) Get(key string) (entryData []byte, found bool) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
 	val, ok := c.cachedEntries[key]
 	if !ok {
 		return nil, false
@@ -49,13 +53,17 @@ func (c *Cache) reapLoop() {
 	for {
 		select {
 		case <- ticker.C:
-			c.mu.Lock()
-			for key, val := range c.cachedEntries {
-				if time.Since(val.createdAt) > c.interval {
-					delete(c.cachedEntries, key)
-				}
-			}
-			c.mu.Unlock()
+			c.reap()
+		}
+	}
+}
+
+func (c *Cache) reap() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	for key, val := range c.cachedEntries {
+		if time.Since(val.createdAt) > c.interval {
+			delete(c.cachedEntries, key)
 		}
 	}
 }
@@ -64,8 +72,9 @@ func NewCache(interval time.Duration) Cache {
 	cache := Cache{
         cachedEntries: make(map[string]cacheEntry),
         interval:      interval,
-        // mu is automatically initialized to its zero value
+        mu:			   &sync.Mutex{},
     }
+
 	go cache.reapLoop()
 
 	return cache
