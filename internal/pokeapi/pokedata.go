@@ -1,5 +1,9 @@
 package pokeapi
 
+import (
+	"fmt"
+)
+
 type pokePage struct {
 	Count    int     `json:"count"`
 	Next     *string `json:"next"`
@@ -290,6 +294,20 @@ type PokemonStat struct {
 		} `json:"type"`
 	} `json:"types"`
 	Weight int `json:"weight"`
+}
+
+// Using a VALUE receiver, because PrintStats should change nothing
+func (p PokemonStat) PrintStats() {
+	fmt.Println(fmt.Sprintf("Height: %d", p.Height))
+	fmt.Println(fmt.Sprintf("Weight: %d", p.Weight))
+	fmt.Println("Stats:")
+	for _, stat := range p.Stats{
+		fmt.Println(fmt.Sprintf("  -%s: %d", stat.Stat.Name, stat.BaseStat))
+	}
+	fmt.Println("Types:")
+	for _, typ := range p.Types{
+		fmt.Println(fmt.Sprintf("  -%s", typ.Type.Name))
+	}
 }
 
 type LocationArea struct {

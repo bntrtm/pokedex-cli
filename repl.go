@@ -53,6 +53,16 @@ func cmdRegistry() map[string]cliCommand {
                         description:  "Throw a pokeball at a pokemon!",
                         callback:     commandCatch,
                 },
+				"pokedex": {
+                        name:         "pokedex",
+                        description:  "List your pokemon",
+                        callback:     commandPokedex,
+                },
+				"inspect": {
+                        name:         "inspect",
+                        description:  "See stats of a pokemon in your pokedex",
+                        callback:     commandInspect,
+                },
         }
         return cmdMap
 }
