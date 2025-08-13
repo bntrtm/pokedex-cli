@@ -19,6 +19,8 @@ func commandCatch(c *config, args []string) error {
 		return err
 	}
 
+	fmt.Println(fmt.Sprintf("Throwing a Pokeball at %s...", target))
+
 	throwResult := rand.Intn(100)
 	caught := false
 
