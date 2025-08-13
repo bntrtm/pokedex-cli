@@ -48,6 +48,7 @@ func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
 			return PokemonStat{}, err
 	}
 
+	c.cache.Add(url, jsonData)
 	return stats, nil
 }
 
@@ -92,6 +93,7 @@ func (c *Client) GetLocation(area string) (LocationArea, error) {
 			return LocationArea{}, err
 	}
 
+	c.cache.Add(url, jsonData)
 	return locA, nil
 }
 
@@ -139,5 +141,6 @@ func (c *Client) GetPokePage(pageUrl *string) (pokePage, error) {
 			return pokePage{}, err
 	}
 
+	c.cache.Add(url, jsonData)
 	return page, nil
 }
