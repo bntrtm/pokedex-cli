@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
+        "fmt"
 )
 
-func commandHelp(c *config) error {
+func commandHelp(c *config, args []string) error {
         helpString := `
 Welcome to the Pokedex!
 Usage:

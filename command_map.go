@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 
-func commandMap(c *config) error {
+func commandMap(c *config, args []string) error {
 
-	page, err := c.pClient.ListLocations(c.urlNext)
+	page, err := c.pClient.GetPokePage(c.urlNext)
 	if err != nil {
 		return err
 	}
@@ -22,14 +22,14 @@ func commandMap(c *config) error {
 
 }
 
-func commandMapb(c *config) error {
+func commandMapb(c *config, args []string) error {
 
 	if c.urlPrevious == nil {
 			fmt.Println("You're on the first page!")
 			return nil
 	}
 
-	page, err := c.pClient.ListLocations(c.urlPrevious)
+	page, err := c.pClient.GetPokePage(c.urlPrevious)
 	if err != nil {
 		return err
 	}
