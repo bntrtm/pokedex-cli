@@ -40,15 +40,12 @@ func (c *Cache) Get(key string) (entryData []byte, found bool) {
 }
 
 func (c *Cache) reapLoop() {
-	
+
 	ticker := time.NewTicker(c.interval)
 	defer ticker.Stop()
 
-	for {
-		select {
-		case <- ticker.C:
-			c.reap()
-		}
+	for range ticker.C {
+		c.reap()
 	}
 }
 
