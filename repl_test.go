@@ -1,34 +1,34 @@
 package main
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestCleanInput(t *testing.T) {
 	cases := []struct {
-	input		string
-	expected	[]string
+		input    string
+		expected []string
 	}{
 		{
-			input:		" hello world ",
-			expected:	[]string{"hello", "world"},
+			input:    " hello world ",
+			expected: []string{"hello", "world"},
 		},
 		{
-			input:		" Bulbasau r  ",
-			expected:	[]string{"bulbasau", "r"},
+			input:    " Bulbasau r  ",
+			expected: []string{"bulbasau", "r"},
 		},
 		{
-			input:		"Hello, World!",
-			expected:	[]string{"hello,", "world!"},
+			input:    "Hello, World!",
+			expected: []string{"hello,", "world!"},
 		},
 		{
-			input:		"Charmander Bulbasaur PIKACHU",
-			expected:	[]string{"charmander", "bulbasaur", "pikachu"},
+			input:    "Charmander Bulbasaur PIKACHU",
+			expected: []string{"charmander", "bulbasaur", "pikachu"},
 		},
 		{
-			input:		"bLoSSom",
-			expected:	[]string{"blossom"},
+			input:    "bLoSSom",
+			expected: []string{"blossom"},
 		},
 	}
 

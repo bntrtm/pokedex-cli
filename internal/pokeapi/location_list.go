@@ -2,8 +2,8 @@ package pokeapi
 
 import (
 	"encoding/json"
-	"io"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -23,29 +23,29 @@ func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
 
 	// make a request
 	req, err := http.NewRequest("GET", url, nil)
-        if err != nil {
-                return PokemonStat{}, err
-        }
-        resp, err := c.httpClient.Do(req)
-        if err != nil {
-			return PokemonStat{}, err
+	if err != nil {
+		return PokemonStat{}, err
+	}
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return PokemonStat{}, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-			fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
-			return PokemonStat{}, err
+		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		return PokemonStat{}, err
 	}
 
 	jsonData, err := io.ReadAll(resp.Body)
 	if err != nil {
-			return PokemonStat{}, err
+		return PokemonStat{}, err
 	}
 
 	var stats PokemonStat
 	err = json.Unmarshal(jsonData, &stats)
 	if err != nil {
-			return PokemonStat{}, err
+		return PokemonStat{}, err
 	}
 
 	c.cache.Add(url, jsonData)
@@ -68,29 +68,29 @@ func (c *Client) GetLocation(area string) (LocationArea, error) {
 
 	// make a request
 	req, err := http.NewRequest("GET", url, nil)
-        if err != nil {
-                return LocationArea{}, err
-        }
-        resp, err := c.httpClient.Do(req)
-        if err != nil {
-			return LocationArea{}, err
+	if err != nil {
+		return LocationArea{}, err
+	}
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return LocationArea{}, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-			fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
-			return LocationArea{}, err
+		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		return LocationArea{}, err
 	}
 
 	jsonData, err := io.ReadAll(resp.Body)
 	if err != nil {
-			return LocationArea{}, err
+		return LocationArea{}, err
 	}
 
 	var locA LocationArea
 	err = json.Unmarshal(jsonData, &locA)
 	if err != nil {
-			return LocationArea{}, err
+		return LocationArea{}, err
 	}
 
 	c.cache.Add(url, jsonData)
@@ -116,29 +116,29 @@ func (c *Client) GetPokePage(pageUrl *string) (pokePage, error) {
 
 	// make a request
 	req, err := http.NewRequest("GET", url, nil)
-        if err != nil {
-                return pokePage{}, err
-        }
-        resp, err := c.httpClient.Do(req)
-        if err != nil {
-			return pokePage{}, err
+	if err != nil {
+		return pokePage{}, err
+	}
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return pokePage{}, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-			fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
-			return pokePage{}, err
+		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		return pokePage{}, err
 	}
 
 	jsonData, err := io.ReadAll(resp.Body)
 	if err != nil {
-			return pokePage{}, err
+		return pokePage{}, err
 	}
 
 	var page pokePage
 	err = json.Unmarshal(jsonData, &page)
 	if err != nil {
-			return pokePage{}, err
+		return pokePage{}, err
 	}
 
 	c.cache.Add(url, jsonData)

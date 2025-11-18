@@ -9,8 +9,8 @@ type pokePage struct {
 	Next     *string `json:"next"`
 	Previous *string `json:"previous"`
 	Results  []struct {
-		Name string  `json:"name"`
-		URL  string  `json:"url"`
+		Name string `json:"name"`
+		URL  string `json:"url"`
 	} `json:"results"`
 }
 
@@ -301,11 +301,11 @@ func (p PokemonStat) PrintStats() {
 	fmt.Println(fmt.Sprintf("Height: %d", p.Height))
 	fmt.Println(fmt.Sprintf("Weight: %d", p.Weight))
 	fmt.Println("Stats:")
-	for _, stat := range p.Stats{
+	for _, stat := range p.Stats {
 		fmt.Println(fmt.Sprintf("  -%s: %d", stat.Stat.Name, stat.BaseStat))
 	}
 	fmt.Println("Types:")
-	for _, typ := range p.Types{
+	for _, typ := range p.Types {
 		fmt.Println(fmt.Sprintf("  -%s", typ.Type.Name))
 	}
 }
@@ -332,8 +332,8 @@ type EncounterVersionDetails struct {
 	Version Version `json:"version"`
 }
 type EncounterMethodRates struct {
-	EncounterMethod EncounterMethod  `json:"encounter_method"`
-	EncounterVersionDetails  []EncounterVersionDetails `json:"version_details"`
+	EncounterMethod         EncounterMethod           `json:"encounter_method"`
+	EncounterVersionDetails []EncounterVersionDetails `json:"version_details"`
 }
 type Location struct {
 	Name string `json:"name"`
@@ -368,6 +368,6 @@ type PokemonVersionDetails struct {
 	Version          Version            `json:"version"`
 }
 type PokemonEncounters struct {
-	Pokemon        Pokemon          `json:"pokemon"`
+	Pokemon               Pokemon                 `json:"pokemon"`
 	PokemonVersionDetails []PokemonVersionDetails `json:"version_details"`
 }

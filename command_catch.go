@@ -55,6 +55,6 @@ func commandCatch(c *config, args []string) error {
 	} else {
 		fmt.Println("You missed the pokemon!")
 	}
-	
+
 	return nil
 }

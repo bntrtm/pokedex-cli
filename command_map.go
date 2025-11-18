@@ -15,7 +15,7 @@ func commandMap(c *config, args []string) error {
 	c.urlPrevious = page.Previous
 
 	for _, result := range page.Results {
-			fmt.Println(result.Name)
+		fmt.Println(result.Name)
 	}
 
 	return nil
@@ -25,20 +25,20 @@ func commandMap(c *config, args []string) error {
 func commandMapb(c *config, args []string) error {
 
 	if c.urlPrevious == nil {
-			fmt.Println("You're on the first page!")
-			return nil
+		fmt.Println("You're on the first page!")
+		return nil
 	}
 
 	page, err := c.pClient.GetPokePage(c.urlPrevious)
 	if err != nil {
 		return err
 	}
-	
+
 	c.urlNext = page.Next
 	c.urlPrevious = page.Previous
-	
+
 	for _, result := range page.Results {
-			fmt.Println(result.Name)
+		fmt.Println(result.Name)
 	}
 
 	return nil

@@ -1,18 +1,18 @@
 package main
 
 import (
-        "fmt"
+	"fmt"
 )
 
 func commandHelp(c *config, args []string) error {
-        helpString := `
+	helpString := `
 Welcome to the Pokedex!
 Usage:
 
 `
-        for _, val := range cmdRegistry() {
-                helpString += val.name + ": " + val.description + "\n"
-        }
-        fmt.Println(helpString)
-        return nil
+	for _, val := range cmdRegistry() {
+		helpString += val.name + ": " + val.description + "\n"
+	}
+	fmt.Println(helpString)
+	return nil
 }

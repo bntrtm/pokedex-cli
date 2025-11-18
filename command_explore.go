@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandExplore (c *config, args []string) error {
+func commandExplore(c *config, args []string) error {
 	locName := "1"
 	if len(args) > 0 {
 		locName = args[0]
