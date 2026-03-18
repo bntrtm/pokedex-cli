@@ -26,23 +26,23 @@ func commandCatch(c *config, args []string) error {
 	switch {
 	case throwResult >= 95:
 		caught = true
-	case throwResult >= 80 && throwResult < 95:
+	case inBracket(throwResult, 80, 95):
 		if pokemon.BaseExperience < 275 {
 			caught = true
 		}
-	case throwResult >= 70 && throwResult < 80:
+	case inBracket(throwResult, 70, 80):
 		if pokemon.BaseExperience < 220 {
 			caught = true
 		}
-	case throwResult >= 50 && throwResult < 70:
+	case inBracket(throwResult, 50, 70):
 		if pokemon.BaseExperience < 120 {
 			caught = true
 		}
-	case throwResult >= 30 && throwResult < 50:
+	case inBracket(throwResult, 30, 50):
 		if pokemon.BaseExperience < 90 {
 			caught = true
 		}
-	case throwResult >= 0 && throwResult < 30:
+	case inBracket(throwResult, 0, 30):
 		if pokemon.BaseExperience < 45 {
 			caught = true
 		}
@@ -56,4 +56,8 @@ func commandCatch(c *config, args []string) error {
 	}
 
 	return nil
+}
+
+func inBracket(input, moreOrEqualTo, LessThan int) bool {
+	return input >= moreOrEqualTo && input < LessThan
 }
