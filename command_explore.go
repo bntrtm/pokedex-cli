@@ -5,10 +5,11 @@ import (
 )
 
 func commandExplore(c *config, args []string) error {
-	var locName string
-	if len(args) > 0 {
-		locName = args[0]
+	if len(args) == 0 {
+		return fmt.Errorf("no location specified to explore")
 	}
+
+	locName := args[0]
 
 	locA, err := c.pClient.GetLocation(locName)
 	if err != nil {
