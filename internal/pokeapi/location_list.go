@@ -8,7 +8,7 @@ import (
 )
 
 func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
-	url := baseURL + "/pokemon" + "/" + pokemon
+	url := EndpointPokemonStat(pokemon)
 
 	// don't make a request if a response is already cached
 	if val, ok := c.cache.Get(url); ok {
@@ -53,7 +53,7 @@ func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
 }
 
 func (c *Client) GetLocation(area string) (LocationArea, error) {
-	url := baseURL + "/location-area" + "/" + area
+	url := EndpointLocationArea(area)
 
 	// don't make a request if a response is already cached
 	if val, ok := c.cache.Get(url); ok {
