@@ -5,13 +5,12 @@ import (
 )
 
 func commandInspect(c *config, args []string) error {
-	target := "nothing"
-	if len(args) > 0 {
-		target = args[0]
-	} else {
+	if len(args) == 0 {
 		fmt.Println("Enter a pokemon name to inspect!")
 		return nil
 	}
+
+	target := args[0]
 
 	if _, ok := c.pokedex[target]; !ok {
 		fmt.Println("You have not caught that pokemon!")
@@ -25,5 +24,4 @@ func commandInspect(c *config, args []string) error {
 	pokemon.PrintStats()
 
 	return nil
-
 }
