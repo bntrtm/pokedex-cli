@@ -6,7 +6,7 @@ import (
 )
 
 func commandCatch(c *config, args []string) error {
-	target := "nothing"
+	var target string
 	if len(args) > 0 {
 		target = args[0]
 	} else {
@@ -19,7 +19,7 @@ func commandCatch(c *config, args []string) error {
 		return err
 	}
 
-	fmt.Println(fmt.Sprintf("Throwing a Pokeball at %s...", target))
+	fmt.Printf("Throwing a Pokeball at %s...\n", target)
 
 	throwResult := rand.Intn(100)
 	caught := false
@@ -51,7 +51,7 @@ func commandCatch(c *config, args []string) error {
 
 	if caught {
 		c.pokedex[target] = pokemon
-		fmt.Println(fmt.Sprintf("You caught %s!", target))
+		fmt.Printf("You caught %s!\n", target)
 	} else {
 		fmt.Println("You missed the pokemon!")
 	}
