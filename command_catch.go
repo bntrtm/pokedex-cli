@@ -6,13 +6,12 @@ import (
 )
 
 func commandCatch(c *config, args []string) error {
-	var target string
-	if len(args) > 0 {
-		target = args[0]
-	} else {
+	if len(args) == 0 {
 		fmt.Println("No pokemon specified. Enter a pokemon to throw at!")
 		return nil
 	}
+
+	target := args[0]
 
 	pokemon, err := c.pClient.GetPokemon(target)
 	if err != nil {
