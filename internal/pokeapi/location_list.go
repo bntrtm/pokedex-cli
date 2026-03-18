@@ -8,7 +8,7 @@ import (
 )
 
 func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
-	url := baseUrl + "/pokemon" + "/" + pokemon
+	url := baseURL + "/pokemon" + "/" + pokemon
 
 	// don't make a request if a response is already cached
 	if val, ok := c.cache.Get(url); ok {
@@ -33,7 +33,7 @@ func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		fmt.Printf("HTTP error %d for request at /%s\n", resp.StatusCode, url)
 		return PokemonStat{}, err
 	}
 
@@ -53,7 +53,7 @@ func (c *Client) GetPokemon(pokemon string) (PokemonStat, error) {
 }
 
 func (c *Client) GetLocation(area string) (LocationArea, error) {
-	url := baseUrl + "/location-area" + "/" + area
+	url := baseURL + "/location-area" + "/" + area
 
 	// don't make a request if a response is already cached
 	if val, ok := c.cache.Get(url); ok {
@@ -78,7 +78,7 @@ func (c *Client) GetLocation(area string) (LocationArea, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		fmt.Printf("HTTP error %d for request at /%s\n", resp.StatusCode, url)
 		return LocationArea{}, err
 	}
 
@@ -97,10 +97,10 @@ func (c *Client) GetLocation(area string) (LocationArea, error) {
 	return locA, nil
 }
 
-func (c *Client) GetPokePage(pageUrl *string) (pokePage, error) {
-	url := baseUrl + "/location-area"
-	if pageUrl != nil {
-		url = *pageUrl
+func (c *Client) GetPokePage(pageURL *string) (pokePage, error) {
+	url := baseURL + "/location-area"
+	if pageURL != nil {
+		url = *pageURL
 	}
 
 	// don't make a request if a response is already cached
@@ -126,7 +126,7 @@ func (c *Client) GetPokePage(pageUrl *string) (pokePage, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-		fmt.Println(fmt.Sprintf("HTTP error %d for request at /%s", resp.StatusCode, url))
+		fmt.Printf("HTTP error %d for request at /%s\n", resp.StatusCode, url)
 		return pokePage{}, err
 	}
 

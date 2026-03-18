@@ -296,17 +296,21 @@ type PokemonStat struct {
 	Weight int `json:"weight"`
 }
 
-// Using a VALUE receiver, because PrintStats should change nothing
+// PrintStats outputs the height, weight, and battle stats of the
+// pokemon.
+//
+// NOTE: This function uses a VALUE receiver because no properties
+// of the pokemon instance should change.
 func (p PokemonStat) PrintStats() {
-	fmt.Println(fmt.Sprintf("Height: %d", p.Height))
-	fmt.Println(fmt.Sprintf("Weight: %d", p.Weight))
+	fmt.Printf("Height: %d\n", p.Height)
+	fmt.Printf("Weight: %d\n", p.Weight)
 	fmt.Println("Stats:")
 	for _, stat := range p.Stats {
-		fmt.Println(fmt.Sprintf("  -%s: %d", stat.Stat.Name, stat.BaseStat))
+		fmt.Printf("  -%s: %d\n", stat.Stat.Name, stat.BaseStat)
 	}
 	fmt.Println("Types:")
 	for _, typ := range p.Types {
-		fmt.Println(fmt.Sprintf("  -%s", typ.Type.Name))
+		fmt.Printf("  -%s\n", typ.Type.Name)
 	}
 }
 
