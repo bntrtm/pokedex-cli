@@ -24,26 +24,26 @@ func commandCatch(c *config, args []string) error {
 	caught := false
 
 	switch {
-	case throwResult >= 95:
+	case throwResult >= ThrowIncredible:
 		caught = true
-	case inBracket(throwResult, 80, 95):
-		if pokemon.BaseExperience < 275 {
+	case inBracket(throwResult, ThrowGreat, ThrowIncredible):
+		if pokemon.BaseExperience < DifficultyVeryHard {
 			caught = true
 		}
-	case inBracket(throwResult, 70, 80):
-		if pokemon.BaseExperience < 220 {
+	case inBracket(throwResult, ThrowGood, ThrowGreat):
+		if pokemon.BaseExperience < DifficultyHard {
 			caught = true
 		}
-	case inBracket(throwResult, 50, 70):
-		if pokemon.BaseExperience < 120 {
+	case inBracket(throwResult, ThrowOkay, ThrowGood):
+		if pokemon.BaseExperience < DifficultyMedium {
 			caught = true
 		}
-	case inBracket(throwResult, 30, 50):
-		if pokemon.BaseExperience < 90 {
+	case inBracket(throwResult, ThrowLazy, ThrowOkay):
+		if pokemon.BaseExperience < DifficultyEasy {
 			caught = true
 		}
-	case inBracket(throwResult, 0, 30):
-		if pokemon.BaseExperience < 45 {
+	case inBracket(throwResult, DifficultyNone, ThrowLazy):
+		if pokemon.BaseExperience < DifficultyVeryEasy {
 			caught = true
 		}
 	}
